@@ -5,9 +5,11 @@ import Question from "../components/Question";
 
 import { QuestionResponse, QuestionType } from "../types/question";
 import PreLoader from "../components/Preloader";
+import { Button } from "react-bootstrap";
 
 function Questions() {
     const [questions, setQuestions] = useState<QuestionType[]>([]);
+    const [limit, setLimit] = useState(10);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -29,15 +31,28 @@ function Questions() {
         );
     }
     return (
-        <div className='mt-5'>
-            {questions.map((question) => {
-                return (
-                    <Question
-                        key={question.id}
-                        questionObject={question}></Question>
-                );
-            })}
-        </div>
+        <main className='my-5 py-5'>
+            <h1 className='text-center'>All Questions</h1>
+            <div className='my-5 d-flex gap-3 flex-wrap justify-content-center'>
+                {questions.slice(0, limit).map((question) => {
+                    return (
+                        <Question
+                            key={question.id}
+                            questionObject={question}></Question>
+                    );
+                })}
+            </div>
+            {limit < questions.length ? (
+                <div className='text-center'>
+                    <Button
+                        variant='primary'
+                        className='rounded-4'
+                        onClick={() => setLimit(limit + 10)}>
+                        Show More
+                    </Button>
+                </div>
+            ) : null}
+        </main>
     );
 }
 

@@ -1,3 +1,4 @@
+import { Card } from "react-bootstrap";
 import { QuestionType } from "../types/question";
 
 type QuestionProps = {
@@ -5,14 +6,33 @@ type QuestionProps = {
 };
 
 function Question({ questionObject }: QuestionProps) {
-    const { question, author, answer, created_on } = questionObject;
+    const { id, question, author, answer, created_on } = questionObject;
     return (
-        <div>
-            <h2>{question}</h2>
-            <h3>{author}</h3>
-            <p>{created_on}</p>
-            <p>{answer}</p>
-        </div>
+        <Card style={{ width: "18rem" }}>
+            <Card.Body>
+                <Card.Title>Question ID: {id}</Card.Title>
+                <Card.Subtitle className='mb-2 text-muted'>
+                    By: {author}
+                </Card.Subtitle>
+                <Card.Text>
+                    <span className='text-secondary fs-6'>
+                        Created: {created_on}
+                    </span>
+                    <br />
+                    {question}
+                </Card.Text>
+                <p>
+                    Answer:{" "}
+                    <span className='text-success fw-bold '>
+                        {!answer ? (
+                            <span className='text-danger'>No Answer</span>
+                        ) : (
+                            answer
+                        )}
+                    </span>
+                </p>
+            </Card.Body>
+        </Card>
     );
 }
 

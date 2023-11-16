@@ -1,12 +1,13 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 
 function Header() {
     return (
-        <Navbar expand='lg' className=' bg-info  position-fixed top-0  w-100'>
+        <Navbar
+            expand='lg'
+            className=' bg-info z-3   position-fixed top-0  w-100'>
             <Container>
                 <Navbar.Brand href='#home'>React-Bootstrap</Navbar.Brand>
                 <Navbar.Toggle aria-controls='basic-navbar-nav' />
