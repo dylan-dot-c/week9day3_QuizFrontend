@@ -2,8 +2,13 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import UserResponse from "../types/userResponse";
 
-function Header() {
+type HeaderProps = {
+    currentUser: UserResponse | null;
+};
+
+function Header({ currentUser }: HeaderProps) {
     return (
         <Navbar
             expand='lg'
@@ -19,10 +24,34 @@ function Header() {
                         <Nav.Link as={Link} to='/questions'>
                             Questions
                         </Nav.Link>
-                        <Nav.Link as={Link} to='/signup'>
-                            SignUp
-                        </Nav.Link>
                     </Nav>
+                    <div className='d-flex gap-5'>
+                        {!currentUser ? (
+                            <>
+                                <Nav.Link
+                                    className='btn btn-primary'
+                                    as={Link}
+                                    to='/signup'>
+                                    SignUp
+                                </Nav.Link>
+                                <Nav.Link
+                                    className='btn btn-success'
+                                    as={Link}
+                                    to='/login'>
+                                    Login
+                                </Nav.Link>
+                            </>
+                        ) : (
+                            <>
+                                <Nav.Link
+                                    className='fs-3 text-danger'
+                                    as={Link}
+                                    to='/logout'>
+                                    Logout
+                                </Nav.Link>
+                            </>
+                        )}
+                    </div>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
