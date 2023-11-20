@@ -51,7 +51,10 @@ function App() {
                         path='/login'
                         element={<Login setCurrentUser={setCurrentUser} />}
                     />
-                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route
+                        path='/dashboard'
+                        element={<Dashboard currentUser={currentUser} />}
+                    />
                     <Route path='/logout' element={<Logout />} />
                 </Routes>
             </Container>
