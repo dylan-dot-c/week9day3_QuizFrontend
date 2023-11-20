@@ -1,22 +1,29 @@
 import UserQuestions from "../components/UserQuestions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Profile from "../components/Profile";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import UserResponse from "../types/userResponse";
 
-function Dashboard() {
+type DashboardProps = {
+    currentUser: UserResponse | null;
+};
+
+function Dashboard({ currentUser }: DashboardProps) {
     const navigate = useNavigate();
     const [key, setKey] = useState("home");
     const token = localStorage.getItem("token");
 
-    if (token == null) {
-        toast("You must be logged in to access this page", {
-            type: "error",
-        });
-        navigate("/");
-    }
+    useEffect(() => {
+        if (token == null) {
+            toast("You must be logged in to access this page", {
+                type: "error",
+            });
+            navigate("/");
+        }
+    }, []);
 
     return (
         <Tabs
@@ -28,7 +35,7 @@ function Dashboard() {
                 <UserQuestions />
             </Tab>
             <Tab eventKey='profile' title='Profile'>
-                <Profile />
+                <Profile currentUser={currentUser!} />
             </Tab>
         </Tabs>
     );

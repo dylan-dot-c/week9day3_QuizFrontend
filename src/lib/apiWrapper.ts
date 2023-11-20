@@ -172,6 +172,46 @@ async function editQuestion(
 
     return { data, error };
 }
+
+async function editUser(token: string, userData: Partial<UserResponse>) {
+    let data, error;
+
+    try {
+        const response = await apiClientTokenAuth(token).put(
+            userEndpoints.edit,
+            userData
+        );
+        data = response.data;
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            error = err.message;
+        } else {
+            error = "SOmething wrong is happening";
+        }
+    }
+
+    return { data, error };
+}
+
+async function deleteUser(token: string) {
+    let data, error;
+
+    try {
+        const response = await apiClientTokenAuth(token).delete(
+            userEndpoints.delete
+        );
+        data = response.data;
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            error = err.message;
+        } else {
+            error = "SOmething wrong is happening";
+        }
+    }
+
+    return { data, error };
+}
+
 export {
     getAllQuestions,
     loginUser,
@@ -179,4 +219,6 @@ export {
     addNewQuestion,
     deleteQuestion,
     editQuestion,
+    editUser,
+    deleteUser,
 };

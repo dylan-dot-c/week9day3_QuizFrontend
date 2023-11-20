@@ -1,7 +1,6 @@
 import { getUserQuestions, deleteQuestion } from "../lib/apiWrapper";
 import { useEffect, useState } from "react";
 import { QuestionType } from "../types/question";
-import Question from "./Question";
 import Button from "react-bootstrap/Button";
 import NewQuestionModal from "./NewQuestionModal";
 import EditQuestionModal from "./EditModal";
@@ -46,7 +45,7 @@ function UserQuestions() {
                 onClick={() => setShowQuestionModal(true)}>
                 Add New Question
             </Button>
-            <div className='mt-5 '>
+            <div className='mt-5 row justify-content-between gap-3'>
                 {myQuestions.length == 0 ? (
                     <p>You have no Data</p>
                 ) : (
@@ -54,7 +53,7 @@ function UserQuestions() {
                         return (
                             <div
                                 key={question.id}
-                                className='border rounded-5 w-50 p-4 d-inline-block m-3 '>
+                                className='col-5 border rounded-5 p-4 '>
                                 <div className='d-flex justify-content-between'>
                                     <h5>{question.question}</h5>
 
