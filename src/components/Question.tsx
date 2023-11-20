@@ -1,14 +1,55 @@
 import { Card } from "react-bootstrap";
 import { QuestionType } from "../types/question";
+import Form from "react-bootstrap/Form";
+import { FormEvent, useRef } from "react";
 
 type QuestionProps = {
     questionObject: QuestionType;
+    setQuestions: React.Dispatch<React.SetStateAction<QuestionType[]>>;
 };
 
-function Question({ questionObject }: QuestionProps) {
-    const { id, question, author, answer, created_on } = questionObject;
+function Question({ questionObject, setQuestions }: QuestionProps) {
+    // const [correct, setCorrect] = useState<boolean | null>(null);
+    const { id, question, author, answer, created_on, correct } =
+        questionObject;
+    let answerRef = useRef<HTMLInputElement>(null);
+
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault();
+        let answerForm = answerRef.current?.value.toLowerCase();
+        if (answerForm == answer.toLowerCase()) {
+            alert("Correct");
+            // setCorrect(true);
+            setQuestions((prevQuestions) => {
+                return prevQuestions.map((question) => {
+                    if (question.id == id) {
+                        question.correct = true;
+                    }
+                    return question;
+                });
+            });
+        } else {
+            alert("Incorrect");
+            setQuestions((prevQuestions) => {
+                return prevQuestions.map((question) => {
+                    if (question.id == id) {
+                        question.correct = false;
+                    }
+                    return question;
+                });
+            });
+        }
+    }
     return (
-        <Card style={{ width: "18rem" }}>
+        <Card
+            style={{ width: "18rem" }}
+            className={` bg-success-subtle  ${
+                correct == true
+                    ? "border-success border-2"
+                    : correct == false
+                    ? "border-danger border-2 "
+                    : ""
+            }`}>
             <Card.Body>
                 <Card.Title>Question ID: {id}</Card.Title>
                 <Card.Subtitle className='mb-2 text-muted'>
@@ -21,7 +62,17 @@ function Question({ questionObject }: QuestionProps) {
                     <br />
                     {question}
                 </Card.Text>
-                <p>
+                {
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Control
+                            placeholder='Enter Guess'
+                            ref={answerRef}
+                            disabled={typeof correct == "boolean"}
+                        />
+                        <p>Press enter to Submit</p>
+                    </Form>
+                }
+                {/* <p>
                     Answer:{" "}
                     <span className='text-success fw-bold '>
                         {!answer ? (
@@ -30,7 +81,7 @@ function Question({ questionObject }: QuestionProps) {
                             answer
                         )}
                     </span>
-                </p>
+                </p> */}
             </Card.Body>
         </Card>
     );

@@ -4,6 +4,7 @@ export type QuestionType = {
     created_on: string;
     id: number;
     question: string;
+    correct?: boolean | null;
 };
 
 export type QuestionResponse = {
