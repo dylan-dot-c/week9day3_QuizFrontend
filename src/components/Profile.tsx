@@ -1,5 +1,5 @@
 import UserResponse from "../types/userResponse";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditUserModal from "./EditUserModal";
 import { deleteUser } from "../lib/apiWrapper";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,12 @@ function Profile({ currentUser }: ProfileProps) {
         }
     };
     const [showEditModal, setShowEditModal] = useState(false);
+
+    useEffect(() => {
+        if (currentUser?.user_id == 0) {
+            navigate("/login?redirect_url=dashboard");
+        }
+    }, []);
     return (
         <div className='d-flex gap-5 '>
             {currentUser && (

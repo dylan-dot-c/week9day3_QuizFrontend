@@ -2,10 +2,10 @@ import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { useRef } from "react";
 import { loginUser } from "../lib/apiWrapper";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import UserResponse from "../types/userResponse";
 import { Slide } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type LoginProps = {
     setCurrentUser: React.Dispatch<React.SetStateAction<UserResponse | null>>;

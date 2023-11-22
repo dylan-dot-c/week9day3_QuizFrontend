@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useRef } from "react";
 import { addNewQuestion } from "../lib/apiWrapper";
+import { toast } from "react-toastify";
 
 type ModalProps = {
     show: true;
@@ -23,7 +24,10 @@ function NewQuestionModal({ show, setShow }: ModalProps) {
             let question = questionRef.current?.value!;
 
             let result = await addNewQuestion(token, question, answer);
-            alert(result);
+            // alert(result);
+            toast("New Question has been added!", {
+                type: "success",
+            });
             console.log(result);
             setShow(false);
         } else {

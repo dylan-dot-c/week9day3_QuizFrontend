@@ -14,15 +14,33 @@ import { toast, Slide } from "react-toastify";
 import { useState, useEffect } from "react";
 import UserResponse from "./types/userResponse";
 
+const unknownUser = {
+    admin: null,
+    created_on: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    modified_on: "",
+    token: "",
+    user_id: 0,
+};
+
 function App() {
     const [currentUser, setCurrentUser] = useState<UserResponse | null>(null);
-    // const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+
     useEffect(() => {
-        if (currentUser) {
-        } else {
-            localStorage.clear();
+        if (token) {
+            setCurrentUser(unknownUser);
         }
-    }, [currentUser]);
+    }, []);
+
+    // useEffect(() => {
+    //     if (currentUser) {
+    //     } else {
+    //         localStorage.clear();
+    //     }
+    // }, [currentUser]);
 
     function Logout() {
         const navigate = useNavigate();

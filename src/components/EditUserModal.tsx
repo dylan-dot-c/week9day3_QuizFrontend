@@ -3,8 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useRef, useEffect } from "react";
 import UserResponse from "../types/userResponse";
-import { deleteUser, editUser } from "../lib/apiWrapper";
-import { useNavigate } from "react-router-dom";
+import { editUser } from "../lib/apiWrapper";
 
 type ModalProps = {
     show: true;
@@ -13,7 +12,6 @@ type ModalProps = {
 };
 
 function EditUserModal({ show, setShow, userEdit }: ModalProps) {
-    const navigate = useNavigate();
     const handleClose = () => setShow(false);
     const token = localStorage.getItem("token");
     const firstNameRef = useRef<HTMLInputElement>(null);

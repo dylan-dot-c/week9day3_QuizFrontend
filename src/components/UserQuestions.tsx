@@ -4,6 +4,7 @@ import { QuestionType } from "../types/question";
 import Button from "react-bootstrap/Button";
 import NewQuestionModal from "./NewQuestionModal";
 import EditQuestionModal from "./EditModal";
+import { toast } from "react-toastify";
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 
 function UserQuestions() {
@@ -35,7 +36,9 @@ function UserQuestions() {
             console.log(data, data?.data);
         }
 
-        alert(`Question id ${id} has been deleted`);
+        toast(`Question id ${id} has been deleted`, {
+            type: "info",
+        });
     }
 
     return (
