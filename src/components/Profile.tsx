@@ -23,11 +23,11 @@ function Profile({ currentUser }: ProfileProps) {
     };
     const [showEditModal, setShowEditModal] = useState(false);
 
-    useEffect(() => {
-        if (currentUser?.user_id == 0) {
-            navigate("/login?redirect_url=dashboard");
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (currentUser && currentUser.user_id == 0) {
+    //         navigate("/login?redirect_url=dashboard");
+    //     }
+    // }, [currentUser]);
     return (
         <div className='d-flex gap-5 '>
             {currentUser && (
